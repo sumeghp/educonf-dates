@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Learning Deadlines</title>
+<title>Edu conferences dates</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -196,7 +196,7 @@ footer p{max-width:78ch;margin:6px 0}
 <a class="fork" href="https://github.com/sumeghp/educonf-dates" target="_blank" rel="noopener">Fork me on GitHub</a>
 <header class="top wrap">
   <div>
-    <h1>Learning Deadlines</h1>
+    <h1>Edu conferences dates</h1>
     <p>Calls for papers across education research: AI in education, learning analytics and the learning sciences, as well as STEM, comparative and international education.</p>
   </div>
   <div class="prefs">
@@ -332,7 +332,7 @@ const icsD = ms => new Date(ms).toISOString().replace(/[-:]/g,"").replace(/\.\d{
 const gcal = (c,d) => "https://calendar.google.com/calendar/render?"+new URLSearchParams({action:"TEMPLATE",text:`${c.short} ${c.year}: ${d.label} deadline`,dates:`${icsD(d.ms-3600e3)}/${icsD(d.ms)}`,details:`${c.name}\n${c.url}\nStatus: ${d.status}. Confirm on the conference site.`});
 function ics(list){
   const e = s => String(s).replace(/[\\,;]/g,m=>"\\"+m).replace(/\n/g,"\\n");
-  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Learning Deadlines//EN", ...list.map(([c,d])=>["BEGIN:VEVENT",`UID:${c.id}-${d.date}-${d.label.replace(/\W+/g,"")}@learning-deadlines`,`DTSTAMP:${icsD(Date.now())}`,`DTSTART:${icsD(d.ms-3600e3)}`,`DTEND:${icsD(d.ms)}`,`SUMMARY:${e(`${c.short} ${c.year}: ${d.label} deadline`)}`,`DESCRIPTION:${e(`${c.name} (${d.status}). ${c.url}`)}`,`URL:${c.url}`,"BEGIN:VALARM","TRIGGER:-P7D","ACTION:DISPLAY","DESCRIPTION:Deadline in one week","END:VALARM","END:VEVENT"].join("\r\n")),"END:VCALENDAR"].join("\r\n");
+  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Edu conferences dates//EN", ...list.map(([c,d])=>["BEGIN:VEVENT",`UID:${c.id}-${d.date}-${d.label.replace(/\W+/g,"")}@educonf-dates`,`DTSTAMP:${icsD(Date.now())}`,`DTSTART:${icsD(d.ms-3600e3)}`,`DTEND:${icsD(d.ms)}`,`SUMMARY:${e(`${c.short} ${c.year}: ${d.label} deadline`)}`,`DESCRIPTION:${e(`${c.name} (${d.status}). ${c.url}`)}`,`URL:${c.url}`,"BEGIN:VALARM","TRIGGER:-P7D","ACTION:DISPLAY","DESCRIPTION:Deadline in one week","END:VALARM","END:VEVENT"].join("\r\n")),"END:VCALENDAR"].join("\r\n");
 }
 async function copy(text,msg){ try{ await navigator.clipboard.writeText(text); toast(msg); }catch(e){ toast("Copying isn't allowed here. Use Google Calendar instead."); } }
 let tt; function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("on"),2600); }
@@ -505,7 +505,7 @@ $("#swDark").addEventListener("click",()=>{ state.theme=state.theme==="dark"?"li
 $("#swDys").addEventListener("click",()=>{ state.dys=!state.dys; store.set("ld.dys",state.dys); applyPrefs(); });
 // address assembled only on click, so it never appears in the page text or source as one string
 $("#emailMe").addEventListener("click",()=>{ const u=["sumegh","connect"].join("."), d=["gmail","com"].join(".");
-  const a=document.createElement("a"); a.href="mail"+"to:"+u+"@"+d+"?subject="+encodeURIComponent("Learning Deadlines: conference suggestion"); a.target="_blank"; a.rel="noopener"; document.body.appendChild(a); a.click(); a.remove();
+  const a=document.createElement("a"); a.href="mail"+"to:"+u+"@"+d+"?subject="+encodeURIComponent("Edu conferences dates: conference suggestion"); a.target="_blank"; a.rel="noopener"; document.body.appendChild(a); a.click(); a.remove();
   toast("Opening your email app. If nothing opens, use the GitHub option."); });
 applyPrefs(); initControls(); renderAll();
 })();

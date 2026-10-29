@@ -1,4 +1,4 @@
-# Learning Deadlines
+# Edu conferences dates
 
 Countdowns to conference deadlines across education research: AI in education, learning analytics and educational data mining, the learning sciences and CSCL, computing education, STEM education, comparative and international education, educational technology, engineering education and general education research.
 
