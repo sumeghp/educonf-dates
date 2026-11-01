@@ -1,7 +1,7 @@
 // Conference data. Each deadline: date (YYYY-MM-DD), time (HH:MM, default 23:59), tz ('AoE' | 'UTC' | IANA zone),
 // status: 'announced' (official site) | 'provisional' (tentative / third-party listing) | 'estimated' (from last year's pattern)
-// Last checked: 30 Oct 2026
-window.LAST_CHECKED = "2026-10-30";
+// Last checked: 1 Nov 2026
+window.LAST_CHECKED = "2026-11-01";
 window.TOPICS = {
   aied:  { label: "AI in education",            color: "#0F8A7E" },
   la:    { label: "Learning analytics & EDM",   color: "#4C57C9" },
@@ -24,8 +24,8 @@ window.CONFERENCES = [
       { label: "Research abstracts", date: "2026-09-21", status: "announced" },
       { label: "Full & short papers", date: "2026-09-28", status: "announced" },
       { label: "Doctoral consortium", date: "2026-10-13", status: "announced" },
-      { label: "Practitioner reports", date: "2026-10-22", status: "announced" },
-      { label: "AI Agents Academy", date: "2026-10-27", status: "announced" },
+      { label: "Practitioner reports (extended)", date: "2026-10-22", status: "announced" },
+      { label: "AI Agents Academy (extended)", date: "2026-10-27", status: "announced" },
       { label: "Posters & demos", date: "2026-11-09", status: "announced" },
       { label: "Workshop papers", date: "2026-12-04", status: "announced", note: "Individual workshops may set their own dates." }
     ]
@@ -42,21 +42,29 @@ window.CONFERENCES = [
   },
   {
     id: "csedu27", country: "Italy", start: "2027-04-16", short: "CSEDU", year: 2027, name: "International Conference on Computer Supported Education",
-    topics: ["tel"], region: "Europe", place: "Rome, Italy", dates: "Apr 2027",
-    url: "https://csedu.scitevents.org/",
-    deadlines: [ { label: "Regular papers", date: "2026-11-17", status: "provisional", note: "Listed by a CFP aggregator; confirm on the official site." } ]
+    topics: ["tel"], region: "Europe", place: "Rome, Italy", dates: "16–18 Apr 2027",
+    url: "https://csedu.scitevents.org/ImportantDates.aspx",
+    deadlines: [
+      { label: "Regular papers (1st stage)", date: "2026-11-17", status: "announced" },
+      { label: "Workshop, special session, tutorial, demo & panel proposals", date: "2026-11-27", status: "announced" },
+      { label: "Position papers & regular papers (2nd stage)", date: "2026-12-21", status: "announced" }
+    ]
   },
   {
     id: "educon27", country: "Romania", start: "2027-04-06", short: "EDUCON", year: 2027, name: "IEEE Global Engineering Education Conference",
     topics: ["engd"], region: "Europe", place: "Timișoara, Romania", dates: "6–9 Apr 2027",
     url: "https://educon-conference.org/2027",
-    deadlines: [ { label: "Preliminary papers", date: "2026-11-10", status: "estimated", note: "Based on EDUCON 2026 (10 Nov). Abstract stage was earlier." } ]
+    deadlines: [
+      { label: "Abstracts (all paper formats)", date: "2026-10-30", status: "announced" },
+      { label: "Preliminary papers", date: "2026-12-07", status: "announced" }
+    ]
   },
   {
-    id: "earli27", country: "TBA", start: "2027-08-31", short: "EARLI", year: 2027, name: "EARLI Biennial Conference",
-    topics: ["edres", "ls"], region: "Europe", place: "Venue TBA", dates: "Aug/Sep 2027",
-    url: "https://www.earli.org/",
-    deadlines: [ { label: "Proposals", date: "2026-11-05", time: "23:59", tz: "Europe/Brussels", status: "estimated", note: "EARLI 2025 closed 5 Nov (midnight CET)." } ]
+    id: "earli27", country: "United Kingdom", start: "2027-08-23", short: "EARLI", year: 2027, name: "EARLI Biennial Conference",
+    topics: ["edres", "ls"], region: "Europe", place: "Queen's University Belfast, Northern Ireland", dates: "23–27 Aug 2027",
+    url: "https://earli.org/events/earli2027",
+    note: "JURE 2027 pre-conference: 21–22 Aug 2027.",
+    deadlines: [ { label: "Proposals", date: "2026-11-26", status: "announced", note: "The official page gives no time or time zone." } ]
   },
   {
     id: "gccce27", country: "Singapore", start: "2027-05-31", short: "GCCCE", year: 2027, name: "Global Chinese Conference on Computers in Education",
@@ -69,7 +77,7 @@ window.CONFERENCES = [
     topics: ["csed"], region: "Europe", place: "University of Glasgow, Scotland", dates: "12–14 Jul 2027",
     url: "https://iticse.acm.org/2027/",
     deadlines: [
-      { label: "Abstracts (mandatory)", date: "2027-01-11", status: "provisional" },
+      { label: "Abstracts (mandatory)", date: "2027-01-11", status: "provisional", note: "Dates are marked provisional on the official site." },
       { label: "Full papers", date: "2027-01-18", status: "provisional" }
     ]
   },
@@ -90,7 +98,10 @@ window.CONFERENCES = [
     id: "asee27", country: "Canada", start: "2027-06-20", short: "ASEE", year: 2027, name: "ASEE Annual Conference & Exposition",
     topics: ["engd"], region: "Americas", place: "Toronto, Canada", dates: "20–23 Jun 2027",
     url: "https://www.asee.org/events/2027-Annual-Conference-Exposition/Paper-Management/Call-for-Papers",
-    deadlines: [ { label: "Draft papers", date: "2027-01-20", status: "provisional", note: "Date from one division's call; divisions can differ." } ]
+    deadlines: [
+      { label: "Abstracts", date: "2026-10-14", status: "announced", note: "Most divisions; no extension." },
+      { label: "Draft papers", date: "2027-01-20", status: "announced", note: "Date used by most divisions; check your division's call." }
+    ]
   },
   {
     id: "aied27", country: "Australia", start: "2027-07-18", short: "AIED", year: 2027, name: "International Conference on Artificial Intelligence in Education",
@@ -126,7 +137,7 @@ window.CONFERENCES = [
     id: "aect27", country: "TBA", start: "2027-10-20", short: "AECT", year: 2027, name: "AECT International Convention",
     topics: ["tel", "edres"], region: "Americas", place: "Venue TBA", dates: "Autumn 2027",
     url: "https://aect.org/",
-    deadlines: [ { label: "Proposals", date: "2027-02-16", status: "estimated", note: "AECT 2026 proposals closed 16 Feb." } ]
+    deadlines: [ { label: "Proposals", date: "2027-02-16", tz: "America/Los_Angeles", status: "estimated", note: "AECT 2026 proposals closed 16 Feb, 11:59 pm Pacific, with no extension." } ]
   },
   {
     id: "icer27", country: "TBA", start: "2027-08-10", short: "ICER", year: 2027, name: "ACM International Computing Education Research",
@@ -147,9 +158,9 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "comped27", country: "Brazil", start: "2027-10-01", short: "CompEd", year: 2027, name: "ACM Global Computing Education Conference",
-    topics: ["csed"], region: "Americas", place: "São Paulo, Brazil", dates: "Oct 2027",
-    url: "https://sigcse.org/",
+    id: "comped27", country: "Brazil", start: "2027-09-28", short: "CompEd", year: 2027, name: "ACM Global Computing Education Conference",
+    topics: ["csed"], region: "Americas", place: "Insper, São Paulo, Brazil", dates: "28 Sep – 2 Oct 2027",
+    url: "https://comped.acm.org/2027/",
     deadlines: [
       { label: "Abstracts", date: "2027-03-17", status: "estimated", note: "CompEd 2025: abstracts 17 Mar, papers 24 Mar." },
       { label: "Full papers", date: "2027-03-24", status: "estimated" }
@@ -180,10 +191,11 @@ window.CONFERENCES = [
     deadlines: [ { label: "All proposals", date: "2027-09-02", time: "23:59", tz: "America/New_York", status: "estimated", note: "Recent CIES deadlines: 10 Sep 2024, 26 Aug 2025, 3 Sep 2026. No extensions are given." } ]
   },
   {
-    id: "ecer27", country: "Hungary", start: "2027-08-30", short: "ECER", year: 2027, name: "European Conference on Educational Research (EERA)",
-    topics: ["edres", "comp"], region: "Europe", place: "Debrecen, Hungary", dates: "from 30 Aug 2027",
-    url: "https://eera-ecer.de/",
-    deadlines: [ { label: "Papers, posters & symposia", date: "2027-01-31", status: "estimated", note: "ECER usually closes on 31 Jan; 2026 was extended to 1 Feb." } ]
+    id: "ecer27", country: "Hungary", start: "2027-08-31", short: "ECER", year: 2027, name: "European Conference on Educational Research (EERA)",
+    topics: ["edres", "comp"], region: "Europe", place: "University of Debrecen, Hungary", dates: "31 Aug – 3 Sep 2027",
+    url: "https://eera-ecer.de/conferences/ecer-2027-debrecen",
+    note: "Emerging Researchers' Conference: 30–31 Aug 2027.",
+    deadlines: [ { label: "Papers, posters & symposia", date: "2027-01-31", status: "announced", note: "Submissions open 1 Dec 2026." } ]
   },
   {
     id: "bera27", country: "United Kingdom", start: "2027-09-07", short: "BERA", year: 2027, name: "British Educational Research Association Annual Conference",
@@ -193,11 +205,13 @@ window.CONFERENCES = [
   },
   {
     id: "pme50", country: "Japan", start: "2027-07-19", short: "PME", year: 2027, name: "Conference of the International Group for the Psychology of Mathematics Education (PME 50)",
-    topics: ["stem"], region: "Asia", place: "Tokyo, Japan", dates: "Jul 2027",
-    url: "https://pme50-tokyo.jp/",
+    topics: ["stem"], region: "Asia", place: "National Olympics Memorial Youth Center, Tokyo, Japan", dates: "19–24 Jul 2027",
+    url: "https://pme50-tokyo.jp/submission/",
     deadlines: [
-      { label: "Research forum proposals & pre-submission support", date: "2026-12-01", status: "announced" },
-      { label: "Research reports & oral communications", date: "2027-01-15", status: "estimated", note: "PME research reports usually close mid-January." }
+      { label: "Pre-submission support", date: "2026-12-01", status: "provisional", note: "Not confirmed on the current submission page." },
+      { label: "Research forum initial proposals", date: "2026-12-15", status: "announced" },
+      { label: "Research reports, colloquia & publication reports", date: "2027-01-15", status: "announced" },
+      { label: "Oral communications, posters, working groups & seminars", date: "2027-03-01", status: "announced" }
     ]
   },
   {
@@ -213,7 +227,7 @@ window.CONFERENCES = [
     id: "esera27", country: "Spain", start: "2027-08-30", short: "ESERA", year: 2027, name: "European Science Education Research Association Conference",
     topics: ["stem"], region: "Europe", place: "Málaga, Spain", dates: "30 Aug – 3 Sep 2027",
     url: "https://www.esera.org/conference-2027",
-    deadlines: [ { label: "Proposals", date: "2027-01-31", status: "estimated", note: "Call not yet published; this is a rough placeholder. Check the ESERA site." } ]
+    deadlines: [ { label: "Proposals", date: "2027-01-29", time: "23:59", tz: "Europe/Madrid", status: "announced" } ]
   },
   {
     id: "eesd27", country: "Finland", start: "2027-06-14", short: "EESD", year: 2027, name: "International Conference on Engineering Education for Sustainable Development",
@@ -229,6 +243,27 @@ window.CONFERENCES = [
     topics: ["stem"], region: "Americas", place: "Venue TBA", dates: "Spring 2028",
     url: "https://narst.org/",
     deadlines: [ { label: "Proposals", date: "2027-08-15", time: "17:00", tz: "America/New_York", status: "estimated", note: "NARST 2027 closed 15 Aug 2026, 5 pm in the submitter's local time." } ]
+  },
+  {
+    id: "icce27", country: "TBA", start: "2027-11-29", short: "ICCE", year: 2027, name: "International Conference on Computers in Education",
+    topics: ["tel"], region: "TBA", place: "Venue TBA (Asia-Pacific)", dates: "Nov/Dec 2027",
+    url: "https://apsce.net/",
+    deadlines: [ { label: "Main conference papers", date: "2027-05-11", tz: "UTC", status: "estimated", note: "ICCE 2026 main papers closed 12 May 2026; workshop papers 11 Aug 2026." } ]
+  },
+  {
+    id: "t4e27", country: "India", start: "2027-12-06", short: "T4E", year: 2027, name: "International Conference on Technology for Education",
+    topics: ["tel"], region: "Asia", place: "Venue TBA, India", dates: "Dec 2027",
+    url: "https://tc.computer.org/tclt/",
+    deadlines: [
+      { label: "Abstracts", date: "2027-07-15", status: "estimated", note: "T4E abstracts closed 22 Jul 2025 and 19 Jul 2026 (extended from 3 Jul); full papers a week later." },
+      { label: "Full papers", date: "2027-07-22", status: "estimated" }
+    ]
+  },
+  {
+    id: "chi28", country: "TBA", start: "2028-04-24", short: "CHI", year: 2028, name: "ACM CHI Conference on Human Factors in Computing Systems",
+    topics: ["cci"], region: "TBA", place: "Venue TBA", dates: "Spring 2028",
+    url: "https://sigchi.org/",
+    deadlines: [ { label: "Full papers", date: "2027-09-09", status: "estimated", note: "CHI papers closed 11 Sep 2025 (CHI 2026) and 10 Sep 2026 (CHI 2027)." } ]
   },
   // Recently closed (shown with "Show passed")
   {
