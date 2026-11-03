@@ -114,6 +114,7 @@ select{font:inherit;font-size:14px;height:36px;padding:0 28px 0 10px;border:1px 
 .stripe{align-self:stretch;background:var(--c)}
 .c-name{padding:10px 0;min-width:0}
 .c-name b{font:700 17px/1.15 var(--display);letter-spacing:-.005em}
+.rk{font-weight:600;color:var(--muted);margin-left:0!important;font-size:.82em;letter-spacing:0}
 .c-name b span{font-weight:500;color:var(--muted);margin-left:4px;font-size:14px}
 .c-name div{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .c-where{font-size:13.5px;min-width:0}
@@ -267,6 +268,7 @@ footer p{max-width:78ch;margin:6px 0}
 <footer class="wrap">
   <p>Dates come from each conference's official call for papers. <b>Announced</b> means published on the official site. <b>Provisional</b> means marked tentative or taken from a third-party listing. <b>Estimated</b> means the call isn't out yet and the date follows last year's pattern. Always check the conference website before planning around a date.</p>
   <p>Deadlines without a stated time zone are treated as 23:59 Anywhere on Earth (UTC−12). Stars are saved in this browser.</p>
+  <p>Letters in brackets, like AIED (A), are conference ranks from the <a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">ICORE portal</a> (formerly CORE), on its A*, A, B, C scale. ICORE ranks computing venues only, so most education research conferences (AERA, EARLI, CESI and others) have no rank. That says nothing about their quality.</p>
 
   <div class="support"><span>Find this useful?</span><a class="coffee" href="https://buymeacoffee.com/sumeghp" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 2.5v2.5M11.5 2.5v2.5"/></svg>Buy me a coffee</a><a class="sig" href="https://sumeghp.github.io/" target="_blank" rel="noopener" aria-label="Homepage"><span class="plane" aria-hidden="true"></span><span class="word" aria-hidden="true">sumegh p<span>.</span></span></a></div>
 </footer>
@@ -336,6 +338,7 @@ function matches(c, now, ignorePast){
 
 /* ---------- calendar export ---------- */
 const icsD = ms => new Date(ms).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+const rk = c => c.rank ? `<span class="rk" title="ICORE conference rank: ${c.rank}"> (${c.rank})</span>` : "";
 const gcal = (c,d) => "https://calendar.google.com/calendar/render?"+new URLSearchParams({action:"TEMPLATE",text:`${c.short} ${c.year}: ${d.label} deadline`,dates:`${icsD(d.ms-3600e3)}/${icsD(d.ms)}`,details:`${c.name}\n${c.url}\nStatus: ${d.status}. Confirm on the conference site.`});
 function ics(list){
   const e = s => String(s).replace(/[\\,;]/g,m=>"\\"+m).replace(/\n/g,"\\n");
@@ -376,12 +379,12 @@ function renderNext(){
   const [c,d]=pool[0]; el.dataset.ms=d.ms;
   const filtered = state.topic||state.q||state.region||state.country||state.starOnly||state.status;
   el.innerHTML=`<div class="k">Next deadline${filtered?" in your selection":""}</div>
-    <h2>${c.short} ${c.year}</h2>
+    <h2>${c.short}${rk(c)} ${c.year}</h2>
     <div class="what">${d.label} <span class="st ${d.status}">${d.status}</span></div>
     <div class="clock"><div><b data-u="d">0</b><span>days</span></div><div><b data-u="h">00</b><span>hours</span></div><div><b data-u="m">00</b><span>min</span></div><div><b data-u="s">00</b><span>sec</span></div></div>
     <div class="when">${fmt(d.ms)}</div>
     <div class="go"><button class="btn primary" data-jump="${c.id}">View details</button><a class="btn" href="${gcal(c,d)}" target="_blank" rel="noopener">Add to calendar</a></div>
-    ${pool.length>1?`<div class="upnext"><h4>After that</h4>${pool.slice(1,5).map(([c2,d2])=>`<button data-jump="${c2.id}" style="--c:${c2.color}"><i></i><span><b style="font-weight:600">${c2.short}</b> ${d2.label}</span><span>${Math.ceil((d2.ms-now)/864e5)}d</span></button>`).join("")}</div>`:""}`;
+    ${pool.length>1?`<div class="upnext"><h4>After that</h4>${pool.slice(1,5).map(([c2,d2])=>`<button data-jump="${c2.id}" style="--c:${c2.color}"><i></i><span><b style="font-weight:600">${c2.short}${rk(c2)}</b> ${d2.label}</span><span>${Math.ceil((d2.ms-now)/864e5)}d</span></button>`).join("")}</div>`:""}`;
   tickNext();
 }
 function tickNext(){ const el=$("#next"); if(!el.dataset.ms) return; const p=parts(+el.dataset.ms-Date.now());
@@ -453,7 +456,7 @@ function row(c, now){
     </div>` : "";
   return `<div class="row ${nx?'':'past'}" id="c-${c.id}" style="--c:${c.color}" data-toggle="${c.id}" role="button" tabindex="0" aria-expanded="${open}">
     <div class="stripe"></div>
-    <div class="c-name"><b>${c.short}<span>${c.year}</span></b><div title="${c.name}">${c.name}</div></div>
+    <div class="c-name"><b>${c.short}${rk(c)}<span>${c.year}</span></b><div title="${c.name}">${c.name}</div></div>
     <div class="c-where"><div>${c.dates}</div><div>${c.place}</div></div>
     <div class="c-dl"><div class="lbl">${nx?"":"Last: "}${d.label}<span class="st ${d.status}">${d.status}</span></div><div class="dt num">${fmt(d.ms)}${more>0?` · +${more} more`:""}</div></div>
     <div class="c-cd ${urg(left)}" data-cd="${d.ms}">${cdMain(left)}<small>${cdSub(left)}</small></div>

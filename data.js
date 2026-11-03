@@ -16,7 +16,7 @@ window.TOPICS = {
 };
 window.CONFERENCES = [
   {
-    id: "lak27", country: "Brazil", start: "2027-03-08", short: "LAK", year: 2027, name: "International Conference on Learning Analytics & Knowledge",
+    id: "lak27", country: "Brazil", start: "2027-03-08", short: "LAK", rank: "A", year: 2027, name: "International Conference on Learning Analytics & Knowledge",
     topics: ["la"], region: "Americas", place: "Recife, Brazil", dates: "8–12 Mar 2027",
     url: "https://www.solaresearch.org/events/lak/lak27/general-call/",
     note: "Research papers will be published as a Journal of Learning Analytics special issue (trial for 2027).",
@@ -41,7 +41,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "csedu27", country: "Italy", start: "2027-04-16", short: "CSEDU", year: 2027, name: "International Conference on Computer Supported Education",
+    id: "csedu27", country: "Italy", start: "2027-04-16", short: "CSEDU", rank: "B", year: 2027, name: "International Conference on Computer Supported Education",
     topics: ["tel"], region: "Europe", place: "Rome, Italy", dates: "16–18 Apr 2027",
     url: "https://csedu.scitevents.org/ImportantDates.aspx",
     deadlines: [
@@ -51,7 +51,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "educon27", country: "Romania", start: "2027-04-06", short: "EDUCON", year: 2027, name: "IEEE Global Engineering Education Conference",
+    id: "educon27", country: "Romania", start: "2027-04-06", short: "EDUCON", rank: "C", year: 2027, name: "IEEE Global Engineering Education Conference",
     topics: ["engd"], region: "Europe", place: "Timișoara, Romania", dates: "6–9 Apr 2027",
     url: "https://educon-conference.org/2027",
     deadlines: [
@@ -73,7 +73,7 @@ window.CONFERENCES = [
     deadlines: [ { label: "Papers", date: "2026-12-15", status: "announced" } ]
   },
   {
-    id: "iticse27", country: "United Kingdom", start: "2027-07-12", short: "ITiCSE", year: 2027, name: "ACM Innovation and Technology in Computer Science Education",
+    id: "iticse27", country: "United Kingdom", start: "2027-07-12", short: "ITiCSE", rank: "B", year: 2027, name: "ACM Innovation and Technology in Computer Science Education",
     topics: ["csed"], region: "Europe", place: "University of Glasgow, Scotland", dates: "12–14 Jul 2027",
     url: "https://iticse.acm.org/2027/",
     deadlines: [
@@ -82,14 +82,14 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "icalt27", country: "Germany", start: "2027-07-19", short: "ICALT", year: 2027, name: "IEEE International Conference on Advanced Learning Technologies",
+    id: "icalt27", country: "Germany", start: "2027-07-19", short: "ICALT", rank: "B", year: 2027, name: "IEEE International Conference on Advanced Learning Technologies",
     topics: ["tel"], region: "Europe", place: "FH Dortmund, Germany", dates: "19–22 Jul 2027",
     url: "https://tc.computer.org/tclt/icalt-2027/",
     note: "ICALT has extended its deadline by 2–4 weeks in most recent years.",
     deadlines: [ { label: "All papers (full, short, discussion, DC)", date: "2027-01-15", status: "announced" } ]
   },
   {
-    id: "idc27", country: "United States", start: "2027-06-21", short: "IDC", year: 2027, name: "ACM Interaction Design and Children",
+    id: "idc27", country: "United States", start: "2027-06-21", short: "IDC", rank: "B", year: 2027, name: "ACM Interaction Design and Children",
     topics: ["cci"], region: "Americas", place: "Seattle, USA", dates: "from 21 Jun 2027",
     url: "https://idc.acm.org/",
     deadlines: [ { label: "Full & short papers", date: "2027-01-18", status: "estimated", note: "IDC has usually closed in mid-to-late January." } ]
@@ -104,13 +104,13 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "aied27", country: "Australia", start: "2027-07-18", short: "AIED", year: 2027, name: "International Conference on Artificial Intelligence in Education",
+    id: "aied27", country: "Australia", start: "2027-07-18", short: "AIED", rank: "A", year: 2027, name: "International Conference on Artificial Intelligence in Education",
     topics: ["aied"], region: "Oceania", place: "Adelaide, Australia (Festival of Learning)", dates: "18–23 Jul 2027",
     url: "https://iaied.org/",
     deadlines: [ { label: "Full & short papers", date: "2027-02-01", status: "estimated", note: "AIED 2026 closed 2 Feb; 2025 on 19 Feb." } ]
   },
   {
-    id: "las27", country: "Australia", start: "2027-07-18", short: "L@S", year: 2027, name: "ACM Conference on Learning @ Scale",
+    id: "las27", country: "Australia", start: "2027-07-18", short: "L@S", rank: "B", year: 2027, name: "ACM Conference on Learning @ Scale",
     topics: ["la", "tel"], region: "Oceania", place: "Adelaide, Australia (Festival of Learning)", dates: "18–23 Jul 2027",
     url: "https://learningatscale.hosting.acm.org/",
     deadlines: [
@@ -119,7 +119,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "edm27", country: "Australia", start: "2027-07-18", short: "EDM", year: 2027, name: "International Conference on Educational Data Mining",
+    id: "edm27", country: "Australia", start: "2027-07-18", short: "EDM", rank: "B", year: 2027, name: "International Conference on Educational Data Mining",
     topics: ["la"], region: "Oceania", place: "Adelaide, Australia (Festival of Learning)", dates: "18–23 Jul 2027",
     url: "https://educationaldatamining.org/",
     deadlines: [
@@ -128,7 +128,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "fie27", country: "TBA", start: "2027-10-15", short: "FIE", year: 2027, name: "IEEE Frontiers in Education",
+    id: "fie27", country: "TBA", start: "2027-10-15", short: "FIE", rank: "C", year: 2027, name: "IEEE Frontiers in Education",
     topics: ["engd", "csed"], region: "TBA", place: "Venue TBA", dates: "Oct 2027",
     url: "https://fie-conference.org/",
     deadlines: [ { label: "Abstracts", date: "2027-02-01", status: "estimated", note: "FIE 2026 abstracts closed 2 Feb (extended)." } ]
@@ -140,7 +140,7 @@ window.CONFERENCES = [
     deadlines: [ { label: "Proposals", date: "2027-02-16", tz: "America/Los_Angeles", status: "estimated", note: "AECT 2026 proposals closed 16 Feb, 11:59 pm Pacific, with no extension." } ]
   },
   {
-    id: "icer27", country: "TBA", start: "2027-08-10", short: "ICER", year: 2027, name: "ACM International Computing Education Research",
+    id: "icer27", country: "TBA", start: "2027-08-10", short: "ICER", rank: "A", year: 2027, name: "ACM International Computing Education Research",
     topics: ["csed"], region: "TBA", place: "Venue TBA", dates: "Aug 2027",
     url: "https://icer.acm.org/",
     deadlines: [
@@ -149,7 +149,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "ectel27", country: "TBA", start: "2027-09-15", short: "EC-TEL", year: 2027, name: "European Conference on Technology Enhanced Learning",
+    id: "ectel27", country: "TBA", start: "2027-09-15", short: "EC-TEL", rank: "B", year: 2027, name: "European Conference on Technology Enhanced Learning",
     topics: ["tel"], region: "Europe", place: "Venue TBA", dates: "Sep 2027",
     url: "https://ea-tel.eu/",
     deadlines: [
@@ -245,7 +245,7 @@ window.CONFERENCES = [
     deadlines: [ { label: "Proposals", date: "2027-08-15", time: "17:00", tz: "America/New_York", status: "estimated", note: "NARST 2027 closed 15 Aug 2026, 5 pm in the submitter's local time." } ]
   },
   {
-    id: "icce27", country: "TBA", start: "2027-11-29", short: "ICCE", year: 2027, name: "International Conference on Computers in Education",
+    id: "icce27", country: "TBA", start: "2027-11-29", short: "ICCE", rank: "C", year: 2027, name: "International Conference on Computers in Education",
     topics: ["tel"], region: "TBA", place: "Venue TBA (Asia-Pacific)", dates: "Nov/Dec 2027",
     url: "https://apsce.net/",
     deadlines: [ { label: "Main conference papers", date: "2027-05-11", tz: "UTC", status: "estimated", note: "ICCE 2026 main papers closed 12 May 2026; workshop papers 11 Aug 2026." } ]
@@ -260,7 +260,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "chi28", country: "TBA", start: "2028-04-24", short: "CHI", year: 2028, name: "ACM CHI Conference on Human Factors in Computing Systems",
+    id: "chi28", country: "TBA", start: "2028-04-24", short: "CHI", rank: "A*", year: 2028, name: "ACM CHI Conference on Human Factors in Computing Systems",
     topics: ["cci"], region: "TBA", place: "Venue TBA", dates: "Spring 2028",
     url: "https://sigchi.org/",
     deadlines: [ { label: "Full papers", date: "2027-09-09", status: "estimated", note: "CHI papers closed 11 Sep 2025 (CHI 2026) and 10 Sep 2026 (CHI 2027)." } ]
@@ -301,7 +301,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "icce26", country: "New Zealand", start: "2026-11-30", short: "ICCE", year: 2026, name: "International Conference on Computers in Education",
+    id: "icce26", country: "New Zealand", start: "2026-11-30", short: "ICCE", rank: "C", year: 2026, name: "International Conference on Computers in Education",
     topics: ["tel"], region: "Oceania", place: "Ōtautahi Christchurch, New Zealand", dates: "30 Nov – 4 Dec 2026",
     url: "https://icce2026.csse.canterbury.ac.nz/",
     deadlines: [
@@ -310,7 +310,7 @@ window.CONFERENCES = [
     ]
   },
   {
-    id: "chi27", country: "United States", start: "2027-05-10", short: "CHI", year: 2027, name: "ACM CHI Conference on Human Factors in Computing Systems",
+    id: "chi27", country: "United States", start: "2027-05-10", short: "CHI", rank: "A*", year: 2027, name: "ACM CHI Conference on Human Factors in Computing Systems",
     topics: ["cci"], region: "Americas", place: "Pittsburgh, USA", dates: "10–14 May 2027",
     url: "https://chi2027.acm.org/",
     deadlines: [ { label: "Full papers", date: "2026-09-10", status: "announced" } ]

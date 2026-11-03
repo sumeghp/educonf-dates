@@ -36,7 +36,7 @@ All data lives in [`data.js`](data.js). Each conference looks like this:
 ```js
 {
   id: "lak27", country: "Brazil", start: "2027-03-08",
-  short: "LAK", year: 2027,
+  short: "LAK", rank: "A", year: 2027,   // rank: optional ICORE rank (A*, A, B, C)
   name: "International Conference on Learning Analytics & Knowledge",
   topics: ["la"],                 // keys from TOPICS at the top of data.js
   region: "Americas",             // Asia, Europe, Americas, Oceania or TBA
