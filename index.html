@@ -114,6 +114,7 @@ select{font:inherit;font-size:14px;height:36px;padding:0 28px 0 10px;border:1px 
 .stripe{align-self:stretch;background:var(--c)}
 .c-name{padding:10px 0;min-width:0}
 .c-name b{font:700 17px/1.15 var(--display);letter-spacing:-.005em}
+.rk.nr{font-weight:500;opacity:.6}
 .rk{font-weight:600;color:var(--muted);margin-left:0!important;font-size:.82em;letter-spacing:0}
 .c-name b span{font-weight:500;color:var(--muted);margin-left:4px;font-size:14px}
 .c-name div{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -238,6 +239,7 @@ footer p{max-width:78ch;margin:6px 0}
           <option value="countdown-desc">Most time left</option>
           <option value="conf">Conference date</option>
           <option value="name">Name (A–Z)</option>
+          <option value="rank">ICORE rank</option>
         </select></label>
       <select id="region" aria-label="Region"></select>
       <select id="country" aria-label="Country"></select>
@@ -246,6 +248,7 @@ footer p{max-width:78ch;margin:6px 0}
       </select>
       <select id="tz" aria-label="Time zone"></select>
       <button class="tog" id="starOnly" aria-pressed="false">★ Starred</button>
+      <button class="tog" id="rankedOnly" aria-pressed="false" title="Only conferences with an ICORE rank">Ranked</button>
       <button class="tog" id="showPast" aria-pressed="false">Passed</button>
     </div>
     <div class="topics" id="topics" role="group" aria-label="Topics"></div>
@@ -268,7 +271,7 @@ footer p{max-width:78ch;margin:6px 0}
 <footer class="wrap">
   <p>Dates come from each conference's official call for papers. <b>Announced</b> means published on the official site. <b>Provisional</b> means marked tentative or taken from a third-party listing. <b>Estimated</b> means the call isn't out yet and the date follows last year's pattern. Always check the conference website before planning around a date.</p>
   <p>Deadlines without a stated time zone are treated as 23:59 Anywhere on Earth (UTC−12). Stars are saved in this browser.</p>
-  <p>Letters in brackets, like AIED (A), are conference ranks from the <a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">ICORE portal</a> (formerly CORE), on its A*, A, B, C scale. ICORE ranks computing venues only, so most education research conferences (AERA, EARLI, CESI and others) have no rank. That says nothing about their quality.</p>
+  <p>Letters in brackets, like AIED (A), are conference ranks from the <a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">ICORE portal</a> (formerly CORE), on its A*, A, B, C scale. ICORE ranks computing venues only, so most education research conferences (AERA, EARLI, CESI and others) have no rank and show (NR). That says nothing about their quality. Use <b>Ranked</b> or sort by <b>ICORE rank</b> to bring the ranked ones together.</p>
 
   <div class="support"><span>Find this useful?</span><a class="coffee" href="https://buymeacoffee.com/sumeghp" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 2.5v2.5M11.5 2.5v2.5"/></svg>Buy me a coffee</a><a class="sig" href="https://sumeghp.github.io/" target="_blank" rel="noopener" aria-label="Homepage"><span class="plane" aria-hidden="true"></span><span class="word" aria-hidden="true">sumegh p<span>.</span></span></a></div>
 </footer>
@@ -283,7 +286,7 @@ const store = {
   get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
   set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 };
-const state = { q:"", topic:"", region:"", country:"", status:"", sort: store.get("ld.sort","deadline"), starOnly:false, showPast:false,
+const state = { q:"", topic:"", region:"", country:"", status:"", sort: store.get("ld.sort","deadline"), starOnly:false, rankedOnly:false, showPast:false,
   tz: store.get("ld.tz","local"), theme: store.get("ld.theme", matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"), dys: store.get("ld.dys", false), stars:new Set(store.get("ld.stars",[])), open:new Set(), calOffset:0 };
 
 /* ---------- time ---------- */
@@ -324,6 +327,7 @@ const lastOf = c => c.deadlines[c.deadlines.length-1];
 
 function matches(c, now, ignorePast){
   if (state.starOnly && !state.stars.has(c.id)) return false;
+  if (state.rankedOnly && !c.rank) return false;
   if (!ignorePast && !state.showPast && !nextOf(c,now)) return false;
   if (state.topic && !c.topics.includes(state.topic)) return false;
   if (state.region && c.region!==state.region) return false;
@@ -338,7 +342,9 @@ function matches(c, now, ignorePast){
 
 /* ---------- calendar export ---------- */
 const icsD = ms => new Date(ms).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
-const rk = c => c.rank ? `<span class="rk" title="ICORE conference rank: ${c.rank}"> (${c.rank})</span>` : "";
+const rk = c => c.rank ? `<span class="rk" title="ICORE conference rank: ${c.rank}"> (${c.rank})</span>` : `<span class="rk nr" title="Not ranked by ICORE (it ranks computing venues only)"> (NR)</span>`;
+const RORD = {"A*":0,A:1,B:2,C:3};
+const rord = c => c.rank in RORD ? RORD[c.rank] : 9;
 const gcal = (c,d) => "https://calendar.google.com/calendar/render?"+new URLSearchParams({action:"TEMPLATE",text:`${c.short} ${c.year}: ${d.label} deadline`,dates:`${icsD(d.ms-3600e3)}/${icsD(d.ms)}`,details:`${c.name}\n${c.url}\nStatus: ${d.status}. Confirm on the conference site.`});
 function ics(list){
   const e = s => String(s).replace(/[\\,;]/g,m=>"\\"+m).replace(/\n/g,"\\n");
@@ -377,7 +383,7 @@ function renderNext(){
   const el=$("#next");
   if (!pool.length){ el.dataset.ms=""; el.innerHTML=`<div class="k">Next deadline</div><h2>None</h2><div class="what">Nothing upcoming matches your filters.</div>`; return; }
   const [c,d]=pool[0]; el.dataset.ms=d.ms;
-  const filtered = state.topic||state.q||state.region||state.country||state.starOnly||state.status;
+  const filtered = state.topic||state.q||state.region||state.country||state.starOnly||state.rankedOnly||state.status;
   el.innerHTML=`<div class="k">Next deadline${filtered?" in your selection":""}</div>
     <h2>${c.short}${rk(c)} ${c.year}</h2>
     <div class="what">${d.label} <span class="st ${d.status}">${d.status}</span></div>
@@ -421,8 +427,8 @@ function renderCal(){
 function sorted(list, now){
   const nd = c => (nextOf(c,now)||lastOf(c)).ms;
   const upcoming=list.filter(c=>nextOf(c,now)), past=list.filter(c=>!nextOf(c,now)).sort((a,b)=>lastOf(b).ms-lastOf(a).ms);
-  const by = { deadline:(a,b)=>nd(a)-nd(b), "countdown-desc":(a,b)=>nd(b)-nd(a), conf:(a,b)=>a.start.localeCompare(b.start), name:(a,b)=>a.short.localeCompare(b.short)||a.year-b.year }[state.sort];
-  return state.sort==="deadline" || state.sort==="countdown-desc" ? [upcoming.sort(by), past] : [[...upcoming, ...past].sort(by), []];
+  const by = { deadline:(a,b)=>nd(a)-nd(b), "countdown-desc":(a,b)=>nd(b)-nd(a), conf:(a,b)=>a.start.localeCompare(b.start), name:(a,b)=>a.short.localeCompare(b.short)||a.year-b.year, rank:(a,b)=>rord(a)-rord(b)||nd(a)-nd(b) }[state.sort];
+  return state.sort==="deadline" || state.sort==="countdown-desc" || state.sort==="rank" ? [upcoming.sort(by), past] : [[...upcoming, ...past].sort(by), []];
 }
 function renderList(){
   const now=Date.now();
@@ -467,7 +473,7 @@ function row(c, now){
 function renderAll(){ renderCountries(); renderTopics(); renderNext(); renderCal(); renderList(); }
 
 /* ---------- events ---------- */
-function resetFilters(){ Object.assign(state,{q:"",topic:"",region:"",country:"",status:"",starOnly:false}); $("#q").value=""; $("#region").value=""; $("#status").value=""; $("#starOnly").setAttribute("aria-pressed","false"); }
+function resetFilters(){ Object.assign(state,{q:"",topic:"",region:"",country:"",status:"",starOnly:false,rankedOnly:false}); $("#q").value=""; $("#region").value=""; $("#status").value=""; $("#starOnly").setAttribute("aria-pressed","false"); $("#rankedOnly").setAttribute("aria-pressed","false"); }
 function jump(id){
   const c=C.find(x=>x.id===id), now=Date.now();
   if (!matches(c,now)){ if(!nextOf(c,now)){ state.showPast=true; $("#showPast").setAttribute("aria-pressed","true"); } if(!matches(c,now)) resetFilters(); }
@@ -483,6 +489,7 @@ document.addEventListener("click", e=>{
   if (t.dataset.ics){ const c=C.find(x=>x.id===t.dataset.ics); const l=c.deadlines.filter(d=>d.ms>Date.now()).map(d=>[c,d]); copy(ics(l),`Copied ${l.length} event${l.length>1?"s":""}. Save as a .ics file to import.`); return; }
   if (t.dataset.jump){ jump(t.dataset.jump); return; }
   if (t.dataset.toggle){ const k=t.dataset.toggle; state.open.has(k)?state.open.delete(k):state.open.add(k); renderList(); return; }
+  if (t.id==="rankedOnly"){ state.rankedOnly=!state.rankedOnly; t.setAttribute("aria-pressed",state.rankedOnly); renderAll(); return; }
   if (t.id==="starOnly"){ state.starOnly=!state.starOnly; t.setAttribute("aria-pressed",state.starOnly); renderAll(); return; }
   if (t.id==="showPast"){ state.showPast=!state.showPast; t.setAttribute("aria-pressed",state.showPast); renderAll(); return; }
   if (t.id==="clear"){ resetFilters(); renderAll(); return; }
