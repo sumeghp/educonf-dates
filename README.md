@@ -4,7 +4,7 @@ Countdowns to conference deadlines across education research: AI in education, l
 
 **Live site:** https://sumeghp.github.io/educonf-dates/
 
-Inspired by [aideadlin.es](https://aideadlin.es/), which does the same for AI/ML conferences. A sister site, [DH conferences dates](https://github.com/sumeghp/dhconf-dates), tracks digital humanities conferences.
+Inspired by [aideadlin.es](https://aideadlin.es/), which does the same for AI/ML conferences. Its journal counterpart, [Edu journal calls](https://sumeghp.github.io/edujournal-dates/), tracks special-issue deadlines in education journals. A sister site, [DH conferences dates](https://github.com/sumeghp/dhconf-dates), tracks digital humanities conferences.
 
 ## Features
 
